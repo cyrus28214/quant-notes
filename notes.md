@@ -25,7 +25,15 @@ $$E(R_i) = R_f + \beta_i (E(R_m) - R_f)$$
 - $E(R_m)$: Expected return of overall market.  
 - $E(R_m) - R_f$: Market risk premium (市场风险溢价)
 
- 
+### Alpha and Beta
+
+Beta measures market exposure (敞口), alpha measures returns not explained by market exposure.
+
+Simply, do a linear regression of a portfolio, then:
+
+$$
+\mathrm{portfolio\_returns} = \beta \cdot \mathrm{market\_returns} + \alpha 
+$$
 
 ## Market Analysis
 
@@ -110,11 +118,9 @@ If a piece of information is useful about an asset's value, investors will immed
 
 ### Backtesting (回测)
 
-### Breadth of Stretegy (BR, 决策广度)
-
 ### Information Coefficient (IC, 信息系数)
 
-Evaluate an financial analyst or model. IC shows how closely the forecasts match actual financial results.
+Evaluate an financial analyst or model. IC how the active decisions correlate to returns in excess of the benchmark.
 
 IC can range from -1 to 1:
 - IC = 1: Perfect prediction
@@ -140,7 +146,7 @@ $$
 Instead of using raw values, rank IC calculate correlation using ranks.
 
 $$
-r = \rho_{R(x), R(y)} = \frac{\mathrm{Cov}(R(x), R(y))}{\sigma_{R(x)} \sigma_{R(y)}}
+r = \rho_{Rank(x), Rank(y)} = \frac{\mathrm{Cov}(Rank(x), Rank(y))}{\sigma_{Rank(x)} \sigma_{Rank(y)}}
 $$
 
 #### Calculate Using SciPy
@@ -160,8 +166,41 @@ rank_ic, _ = spearmanr(predicted_returns, actual_returns)
 
 ### Information Ratio (IR, 信息比率)
 
-### 
+Information ratio measures measures the rate of active return per unit of active risk.
+
+$$
+\mathrm{IR} = \frac{R_p - R_b}{\sigma(R_p - R_b)}
+$$
+
+- $R_p$ Portfolio Return
+- $R_b$ Benchmark Return
+- $R_p - R_b$ Active Return
+- $\sigma(R_p - R_b)$ Tracking Error
+
+### Fundamental Law of Active Management (主动投资管理基本定律)
+
+$$
+\mathrm{IR} = \mathrm{IC} \sqrt{\mathrm{BR}}
+$$
+
+- $\mathrm{IR}$ Information ratio, indicates **risk-adjusted returns** here.
+- $\mathrm{IC}$ Information coefficient indicates the **skill of prediction** here.
+- $\mathrm{BR}$ Breadth of Stretegy (BR, 决策广度), is the number of **independent, active** bets or decisions made.
+
+Insight: Can improve performance by two ways:
+1. Improve skills
+2. Increase the number of independent bets made (as long as your $IC > 0$ LOL)
+
+根据大数定律，独立同分布随机变量相加的时候均值增加$n$倍，而标准差增加$\sqrt{n}$，当决策数量增加时，IR的变化是$\frac{n}{\sqrt{n}} = \sqrt{n}$
 
 ### Sharpe Ratio (夏普比率)
+
+Similar to $\mathrm{IR}$, the Sharpe ratio measures the **risk-adjusted return**.
+
+$$
+\mathrm{Sharpe} = \frac{R_p - R_b}{\sigma(R_p)}
+$$
+
+Sharpe's 1966 equation had $R_b$ defined as the risk free rate. That was revised in 1994 to the reference benchmark, making the formulas essentially equivalent to $\mathrm{IR}$.
 
 ### Max Drawdown (MDD, 最大回撤)

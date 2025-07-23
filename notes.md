@@ -8,9 +8,28 @@
     - Revenue - Expenses = Net Income (收入 - 支出 = 净利润).
 - Cash Flow Statement (现金流量表): Focus purely on **actual cach movements** over a specific period.
 
+## Risk and Return
+
+- Risk-Free Rate: Theoratical rate of return that carries no risk. In practice we consider the intruments with extremly low risk, e.g. Goverment Treasury Bills (短期国债)
+
+### Capital Asset Pricing Model (CAPM, 资本资产定价模型)
+
+$$E(R_i) = R_f + \beta_i (E(R_m) - R_f)$$
+
+- $E(R_i)$: Expected return of asset $i$
+- $R_f$: Risk-free rate
+- $\beta_i$ (Beta): A measure of the investment's systematic risk.
+    - $\beta_i = 1$: It moves with market.
+    - $\beta_i > 1$: Is is more volatile than the market.
+    - $\beta_i < 0$: It moves in the opposite direction of the market.
+- $E(R_m)$: Expected return of overall market.  
+- $E(R_m) - R_f$: Market risk premium (市场风险溢价)
+
+ 
+
 ## Market Analysis
 
-## Fundamental Analysis (基本面)
+### Fundamental Analysis (基本面)
 
 Determine an asset's intrinsic value. Valuation (估值) methods is the core of fundamental analysis.
 
@@ -23,7 +42,7 @@ Determine an asset's intrinsic value. Valuation (估值) methods is the core of 
     - Impact of government policies
     - Geopolitical Events
 
-## Technical Analysis (技术面)
+### Technical Analysis (技术面)
 
 Study historical market data.
 
@@ -39,8 +58,6 @@ If a piece of information is useful about an asset's value, investors will immed
 - Weak-Form Efficiency: All **past market information** are reflected. Technical analysis cannot make profit.
 - Semi-Strong Form Efficiency: All **publicly available information** is reflected. Fundamental analysis and technical analysis cannot make profit.
 - Strong-Form Efficiency: **All information** are relfected. Even insider information (内幕消息) cannot make profit.
-
-根据EMH，从投资中获利的关键在于找到没有反应在市场中的信息，在从中获利的过程中市场也变得更有效。
 
 ## Investment Vehicles
 
@@ -62,7 +79,7 @@ If a piece of information is useful about an asset's value, investors will immed
 - Activate Adjustment: Portfolios are frequently adjusted based on market changes.
 - Risk Control
 
-## Trading  
+## Trading
 
 - Position (头寸、持仓)
 - Limit Order (限价单)
@@ -91,6 +108,60 @@ If a piece of information is useful about an asset's value, investors will immed
 
 ## Strategy Evaluation
 
+### Backtesting (回测)
+
+### Breadth of Stretegy (BR, 决策广度)
+
 ### Information Coefficient (IC, 信息系数)
 
+Evaluate an financial analyst or model. IC shows how closely the forecasts match actual financial results.
+
+IC can range from -1 to 1:
+- IC = 1: Perfect prediction
+- IC = 0: Random prediction
+- IC = -1: Negative prediction
+
+In practice, even IC = 0.05 ~ 0.1 can be considered good.
+
+There are different ways to calculate IC.
+
+#### Normal IC (Pearson Correlation)
+
+$$
+r = \rho_{xy} = \frac{\mathrm{Cov}(x, y)}{\sigma_x \sigma_y}
+$$
+
+- $x_i$ is the predicted return of asset $i$
+- $y_i$ is the actual return of asset $i$
+- $\sigma$ means variance
+
+#### Rank IC (Spearman's Rank Correlation)
+
+Instead of using raw values, rank IC calculate correlation using ranks.
+
+$$
+r = \rho_{R(x), R(y)} = \frac{\mathrm{Cov}(R(x), R(y))}{\sigma_{R(x)} \sigma_{R(y)}}
+$$
+
+#### Calculate Using SciPy
+
+```python
+from scipy.stats import pearsonr, spearmanr
+
+# get predicted_returns and actual_returns
+# ...
+
+# --- Normal IC (Pearson Correlation) ---
+normal_ic, _ = pearsonr(predicted_returns, actual_returns)
+
+# --- Rank IC (Spearman's Rank Correlation) ---
+rank_ic, _ = spearmanr(predicted_returns, actual_returns)
+```
+
 ### Information Ratio (IR, 信息比率)
+
+### 
+
+### Sharpe Ratio (夏普比率)
+
+### Max Drawdown (MDD, 最大回撤)

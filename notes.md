@@ -90,6 +90,7 @@ If a piece of information is useful about an asset's value, investors will immed
 ## Trading
 
 - Position (头寸、持仓)
+- Turnover Ratio (换手率): 
 - Limit Order (限价单)
 - Market Order (市价单)
 - Liquidity (流动性)
@@ -204,3 +205,9 @@ $$
 Sharpe's 1966 equation had $R_b$ defined as the risk free rate. That was revised in 1994 to the reference benchmark, making the formulas essentially equivalent to $\mathrm{IR}$.
 
 ### Max Drawdown (MDD, 最大回撤)
+
+Max Drawdown is the maximum observed loss from a peak to a trough of a portfolio.
+
+$$
+\mathrm{MDD} = \max_{t_1 < t_2}\left\{\frac{V(t_1) - V(t_2)}{V(t_1)}\right\}
+$$

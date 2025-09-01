@@ -117,8 +117,6 @@ If a piece of information is useful about an asset's value, investors will immed
 
 ## Strategy Evaluation
 
-### Backtesting (回测)
-
 ### Information Coefficient (IC, 信息系数)
 
 Evaluate an financial analyst or model. IC how the active decisions correlate to returns in excess of the benchmark.
